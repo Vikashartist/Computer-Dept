@@ -1,149 +1,304 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fresher's Form</title>
-    <style>
-        /* Basic reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Info Form</title>
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
 
-        /* Background styling */
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #ff7e5f, #feb47b);
-            overflow: hidden;
-            animation: gradientShift 6s infinite alternate ease-in-out;
-        }
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #6EC1E4, #395B9D);
+    font-family: Arial, sans-serif;
+  }
 
-        /* Background gradient animation */
-        @keyframes gradientShift {
-            0% { background: linear-gradient(135deg, #ff7e5f, #feb47b); }
-            50% { background: linear-gradient(135deg, #4facfe, #00f2fe); }
-            100% { background: linear-gradient(135deg, #43e97b, #38f9d7); }
-        }
+  /* Form container */
+  .form-container {
+    width: 620px;
+   max-width: 620px;
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    animation: popIn 0.6s ease;
+    text-align: center;
+  }
 
-        /* Form container styling */
-        .form-container {
-            margin-top:10px;
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-            width: 200px;
-            text-align: center;
-            animation: fadeIn 1.5s ease;
-        }
+  /* Header */
+  .header-text {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 1rem;
+  }
 
-        /* Form fade-in animation */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+  h2 {
+    color: #444;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
 
-        /* Form title styling */
-        h2 {
-            color: #333;
-            margin-bottom: 20px;
-        }
+  /* Profile Picture Upload */
+  .profile-pic {
+    position: relative;
+    width: 280px;
+    height: 180px;
+    margin: 0 auto 1.2rem;
+    box-shadow: 0 0 0px 0px  #48abe0;
+    border-radius:10%;
+    overflow: hidden;
+    background-color: #e0e0e0;
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
 
-        /* Form input fields styling */
-        .form-container input,
-        .form-container select,
-        .form-container textarea,
-        .form-container button {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 14px;
-        }
+  .profile-pic:hover {
+    transform: scale(1.05);
+  }
 
-        /* Input focus styling */
-        .form-container input:focus,
-        .form-container select:focus,
-        .form-container textarea:focus {
-            outline: none;
-            border-color: #ff7e5f;
-            box-shadow: 0 0 5px rgba(255, 126, 95, 0.5);
-        }
+  .profile-pic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
 
-        /* Button styling */
-        .form-container button {
-            background-color: #ff7e5f;
-            color: #fff;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
+  .profile-pic input[type="file"] {
+    display: none;
+  }
 
-        /* Button hover effect */
-        .form-container button:hover {
-            background-color: #feb47b;
-        }
+  .profile-pic-label {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    padding: 4px;
+    font-size: 0.8rem;
+  }
 
-        /* Placeholder color */
-        ::placeholder {
-            color: #aaa;
-        }
-    </style>
+  /* Input field styling */
+  .form-group {
+    margin-bottom: 1rem;
+    position: relative;
+  }
+
+  .form-group label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+   font-size: 0.95rem;
+  /*  font-size:18px; */
+    color: #666;
+    transition: 0.2s;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 0.9rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    transition: border 0.3s, box-shadow 0.3s;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: #6EC1E4;
+    box-shadow: 0 0 8px 0 rgba(102, 205, 170, 0.6);
+  }
+
+  .form-group input:focus + label,
+  .form-group select:focus + label,
+  .form-group textarea:focus + label,
+  .form-group input:not(:placeholder-shown) + label,
+  .form-group select:not(:placeholder-shown) + label,
+  .form-group textarea:not(:placeholder-shown) + label {
+    top: -18px;
+    left: 5px;
+    font-size: 0.75rem;
+    color: #6EC1E4;
+    background: #fff;
+    padding: 0 5px;
+  }
+
+  /* Submit Button Styling */
+  .submit-btn {
+    width: 100%;
+    padding: 10px;
+    background: #6EC1E4;
+    font-weight:bold;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s, box-shadow 0.3s;
+  }
+  .print{
+    margin-left:74%;
+    margin-top:10px;
+    width: 26%;
+    padding: 10px;
+    background:#03C03C;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight:bold;
+    transition: background 0.3s, box-shadow 0.3s;
+  }
+
+  .submit-btn:hover {
+    background: #5ca0cd;
+    box-shadow: 0 0 10px 0 rgba(102, 205, 170, 0.8);
+  }
+  .msg{
+    margin-top:1px;
+    padding:10px;
+    font-size:0.85rem;
+    font-weight:bold;
+    letter-spacing:1px;
+  }
+
+  /* Animations */
+  @keyframes popIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+</style>
 </head>
 <body>
 
 <div class="form-container">
-    <h2> Dear, Fresher's</h2>
-    <form id="fresherForm">
-        <input type="text" id="name" placeholder="Full Name" required>
-        <input type="text" id="rollno" placeholder="Roll Number" required>
-        <input type="date" id="dob" placeholder="Date of Birth" required>
-        
-        <select id="gender" required>
-            <option value="" disabled selected>Gender</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Other">Other</option>
-        </select>
-        
-        <input type="tel" id="phone" placeholder="WhatsApp Number" pattern="[0-9]{10}" required>
-        <input type="text" id="prevCollege" placeholder="Previous College" required>
-        
-        <textarea id="whyCS" rows="4" placeholder="Why Computer Science?" required></textarea>
-        
-        <button type="button" onclick="submitForm()">Submit</button>
-    </form>
+  <div class="header-text">Dear Freshers,Let us Know You ?</div>
+  <!-- <h2>Student Info Form</h2> -->
+
+  <div class="profile-pic" onclick="document.getElementById('fileUpload').click()">
+    <img id="previewImage" src="https://via.placeholder.com/120" alt="Profile Picture">
+    <label class="profile-pic-label">Upload Photo</label>
+    <input type="file" id="fileUpload" accept="image/*" onchange="previewFile()" />
+  </div>
+
+  <form
+  action="https://formspree.io/f/xjkvweoe"
+  method="POST"
+>
+    
+   
+    <div class="form-group">
+      
+      
+ 
+      <input type="text" id="fullName"name="Full Name" placeholder=" " required>
+      <label for="fullName">Full Name</label>
+    </div>
+
+    <div class="form-group">
+      <input type="number" id="rollNumber"name="Roll No" placeholder="" required>
+      <label for="rollNumber">Roll Number</label>
+    </div>
+
+    <div class="form-group">
+      <input type="date" id="dob"name="DOB" placeholder="" required>
+      <label for="dob">Date of Birth</label>
+    </div>
+
+    <div class="form-group">
+      <select id="gender"name="Gender" required>
+        <option value="" disabled selected></option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option>
+      </select>
+      <label for="gender">Gender</label>
+    </div>
+
+    <div class="form-group">
+      <input type="text" id="hobby"name="My Hubby " placeholder=" " required>
+      <label for="hobby">Hobby</label>
+    </div>
+
+    <div class="form-group">
+      <input type="text" name="Special Talent"id="specialTalent" placeholder=" " required>
+      <label for="specialTalent">Talent / Skills You Are Best at -</label>
+    </div>
+
+    <div class="form-group">
+      <input type="text" id="from"name="I am From " placeholder=" " required>
+      <label for="from">Where Are You From?</label>
+    </div>
+
+    <div class="form-group">
+      <textarea id="whyComputerScience" rows="4" placeholder=" " name="why Computer Science ?"required></textarea>
+      <label for="whyComputerScience">Why  Computer Science?</label>
+    </div>
+
+    <div class="form-group">
+      <input type="tel" id="whatsappNumber" placeholder=" " name="Whatsaps Number" required>
+      <label for="whatsappNumber">WhatsApp Number</label>
+    </div>
+
+    <div class="form-group">
+      <input type="text" id="previousCollege" name="Previous college" placeholder=" " required>
+      <label for="previousCollege">Previous college & school </label>
+    </div>
+
+    <div class="form-group">
+      <textarea id="questionToSenior" rows="4" placeholder=" " name ="Questionto senior"required></textarea>
+      <label for="questionToSenior">Ask question to Your senior ? </label>
+    </div>
+
+    <button type="submit" class="submit-btn">Submit</button>
+    <div class="msg">
+      On submitting, Form will be submitted to Your Super Senior <a href="#">Bikash Mahanandia</a>.
+      
+      <div class="print"onclick="window.print()">
+        Print 
+      </div>
+    </div>
+  </form>
 </div>
 
 <script>
-    // Form submit function with alert message
-    function submitForm() {
-        // Getting form values
-        const name = document.getElementById('name').value;
-        const rollno = document.getElementById('rollno').value;
-        const dob = document.getElementById('dob').value;
-        const gender = document.getElementById('gender').value;
-        const phone = document.getElementById('phone').value;
-        const prevCollege = document.getElementById('prevCollege').value;
-        const whyCS = document.getElementById('whyCS').value;
+alert("Dear Cs freshers - Fill the form !!");
+  function previewFile() {
+    const file = document.getElementById('fileUpload').files[0];
+    const preview = document.getElementById('previewImage');
+    const reader = new FileReader();
 
-        // Simple validation check
-        if (!name || !rollno || !dob || !gender || !phone || !prevCollege || !whyCS) {
-            alert("Please fill all the fields");
-            return;
-        }
+    reader.onloadend = function () {
+      preview.src = reader.result;
+    };
 
-        // Success message
-        alert(`Thank you, ${name}! Your registration for the fresher's party is confirmed.`);
-        document.getElementById('fresherForm').reset();
+    if (file) {
+      reader.readAsDataURL(file);
+    } else {
+      preview.src = "https://via.placeholder.com/120";
     }
+  }
 </script>
 
 </body>
