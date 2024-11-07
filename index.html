@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fresher's Party Registration</title>
+    <style>
+        /* Basic reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Background styling */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ff7e5f, #feb47b);
+            overflow: hidden;
+            animation: gradientShift 6s infinite alternate ease-in-out;
+        }
+
+        /* Background gradient animation */
+        @keyframes gradientShift {
+            0% { background: linear-gradient(135deg, #ff7e5f, #feb47b); }
+            50% { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+            100% { background: linear-gradient(135deg, #43e97b, #38f9d7); }
+        }
+
+        /* Form container styling */
+        .form-container {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+            animation: fadeIn 1.5s ease;
+        }
+
+        /* Form fade-in animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Form title styling */
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Form input fields styling */
+        .form-container input,
+        .form-container select,
+        .form-container textarea,
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        /* Input focus styling */
+        .form-container input:focus,
+        .form-container select:focus,
+        .form-container textarea:focus {
+            outline: none;
+            border-color: #ff7e5f;
+            box-shadow: 0 0 5px rgba(255, 126, 95, 0.5);
+        }
+
+        /* Button styling */
+        .form-container button {
+            background-color: #ff7e5f;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        /* Button hover effect */
+        .form-container button:hover {
+            background-color: #feb47b;
+        }
+
+        /* Placeholder color */
+        ::placeholder {
+            color: #aaa;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Fresher's Party Registration</h2>
+    <form id="fresherForm">
+        <input type="text" id="name" placeholder="Full Name" required>
+        <input type="text" id="rollno" placeholder="Roll Number" required>
+        <input type="date" id="dob" placeholder="Date of Birth" required>
+        
+        <select id="gender" required>
+            <option value="" disabled selected>Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </select>
+        
+        <input type="tel" id="phone" placeholder="WhatsApp Number" pattern="[0-9]{10}" required>
+        <input type="text" id="prevCollege" placeholder="Previous College" required>
+        
+        <textarea id="whyCS" rows="4" placeholder="Why Computer Science?" required></textarea>
+        
+        <button type="button" onclick="submitForm()">Submit</button>
+    </form>
+</div>
+
+<script>
+    // Form submit function with alert message
+    function submitForm() {
+        // Getting form values
+        const name = document.getElementById('name').value;
+        const rollno = document.getElementById('rollno').value;
+        const dob = document.getElementById('dob').value;
+        const gender = document.getElementById('gender').value;
+        const phone = document.getElementById('phone').value;
+        const prevCollege = document.getElementById('prevCollege').value;
+        const whyCS = document.getElementById('whyCS').value;
+
+        // Simple validation check
+        if (!name || !rollno || !dob || !gender || !phone || !prevCollege || !whyCS) {
+            alert("Please fill all the fields");
+            return;
+        }
+
+        // Success message
+        alert(`Thank you, ${name}! Your registration for the fresher's party is confirmed.`);
+        document.getElementById('fresherForm').reset();
+    }
+</script>
+
+</body>
+</html>
